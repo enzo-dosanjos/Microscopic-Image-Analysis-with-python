@@ -50,7 +50,7 @@ def threshold(hist):
     """
     median = np.median(hist) #compute the median of the histogram dataset
     i = 0
-    while hist[i] < median * 1.2: #the threshold will be equal to the value for which the nb of appearance of a pixel is at least superior of 20% from the median
+    while hist[i] < median * 1.3 and hist[i+int(0.08*len(hist))] < median * 1.3: #the threshold will be equal to the value for which the nb of appearance of a pixel is at least superior of 30% from the median for at least 8% of the different pixel values
         i+= 1
     threshold = i
     return threshold

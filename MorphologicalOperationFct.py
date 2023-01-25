@@ -37,8 +37,8 @@ def erode(img, kernel, iteration):
     
     for it in range(iteration):
         for i in range(0, img_row):
-           for j in range(0, img_col):
-               new_image[i+1, j+1] = eroded_img[i, j]
+           for j in range(0, img_col): #to go through each pixels of the image
+               new_image[i+1, j+1] = eroded_img[i, j] #give the pixel's color value of the image to create a identical image but, with a padding
                
         for i in range(0, img_row):
            for j in range(0, img_col):
@@ -81,7 +81,7 @@ def dilate(img, kernel, iteration):
     for it in range(iteration):
         for i in range(0, img_row):
            for j in range(0, img_col): #to go through each pixels of the image
-               new_image[i+1, j+1] = dilated_img[i, j]
+               new_image[i+1, j+1] = dilated_img[i, j] #give the pixel's color value of the image to create a identical image but, with a padding
                
         for i in range(0, img_row):
            for j in range(0, img_col): #to go through each pixels of the image
