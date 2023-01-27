@@ -2,7 +2,7 @@
 """
 Created on Tue Jan 24 21:45:05 2023
 
-@author: Enzo
+@author: Enzo && Sacha
 """
 
 import cv2 #to install opencv: pip install opencv-python
@@ -12,16 +12,24 @@ from MorphologicalOperationFct import *
 from GaussianBlurFct import *
 
 
-img = cv2.imread("sudoku.jpg", 0)
+img = cv2.imread("test.png", 0)
 
-#cv2.imshow("original image", img) #to see the original image
+cv2.imshow("original image", img) #to see the original image
 
 
-gaussian_kernel = np.array([[1, 4, 7, 4, 1], [4, 16, 26, 16, 4], [7, 26, 41, 26, 7], [4, 16, 26, 16, 4], [1, 4, 7, 4, 1]])
+gaussian_kernel = np.array(
+    [
+    [1, 4, 7, 4, 1],
+    [4, 16, 26, 16, 4],
+    [7, 26, 41, 26, 7],
+    [4, 16, 26, 16, 4],
+    [1, 4, 7, 4, 1]
+    ]
+)
 blured_img = blur(img, gaussian_kernel, 1)
 print("bluring" + colored(" done", "green"))
 
-#cv2.imshow("blured image", blured_img) #to see the result of blur
+cv2.imshow("blured image", blured_img) #to see the result of blur
 
 
 hist = histogram(img)
