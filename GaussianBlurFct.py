@@ -8,7 +8,7 @@ Created on Wed Jan 25 17:18:10 2023
 import numpy as np
 
 
-def blur(img, kernel, kern_size, iteration):
+def blur(img, kernel, iteration):
     """
     compute for each pixel the average of the pixel's color value around with a certain weight for each neighboring pixels depending on the defined kernel (simple: blur the image)
 
@@ -48,6 +48,6 @@ def blur(img, kernel, kern_size, iteration):
                blured_pxl_val = 0
                for k in range(0, kern_row):
                   for l in range(0, kern_col):  #to go through each pixels of the kernel_zone
-                      blured_pxl_val += (kernel_zone[k, l] * kernel[k , l])/kern_size #compute the mean of the pixel's color value arround a pixel with a certain weight for each pixel determined by the kernel
+                      blured_pxl_val += (kernel_zone[k, l] * kernel[k , l])/np.sum(kernel) #compute the mean of the pixel's color value arround a pixel with a certain weight for each pixel determined by the kernel
                blured_img[i, j] = blured_pxl_val
     return blured_img
