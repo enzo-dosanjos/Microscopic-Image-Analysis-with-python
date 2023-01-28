@@ -29,26 +29,30 @@ def erode(img, kernel, iteration):
     """
     img_row, img_col = img.shape
     kern_row, kern_col = kernel.shape
-    eroded_img = img/255 #to convert 255s into 1s
+    eroded_img = img / 255  # to convert 255s into 1s
 
-    new_row = img_row + kern_row -1 #compute the row size of the new image with a padding
-    new_col = img_col + kern_col -1 #compute the column size of the new image with a padding
-    new_image = np.zeros((new_row, new_col)) #initialize an array of the size of the image with a padding of one pixel to apply the kernel on every pixels of the image
-    
+    new_row = img_row + kern_row - 1  # compute the row size of the new image with a padding
+    new_col = img_col + kern_col - 1  # compute the column size of the new image with a padding
+    new_image = np.zeros((new_row,
+                          new_col))  # initialize an array of the size of the image with a padding of one pixel to apply the kernel on every pixels of the image
+
     for it in range(iteration):
         for i in range(0, img_row):
-           for j in range(0, img_col): #to go through each pixels of the image
-               new_image[i+1, j+1] = eroded_img[i, j] #give the pixel's color value of the image to create a identical image but, with a padding
-               
+            for j in range(0, img_col):  # to go through each pixels of the image
+                new_image[i + 1, j + 1] = eroded_img[
+                    i, j]  # give the pixel's color value of the image to create a identical image but, with a padding
+
         for i in range(0, img_row):
-           for j in range(0, img_col):
-               kernel_zone = new_image[i:i+kern_row, j:j+kern_col] #create a copy of a zone of pixels of the image of the same size as the kernel
-               if (kernel_zone == kernel).all(): #verify for each pixels (each element of the array) in the kernel_zone if they are the same as the ones in the kernel
-                   eroded_img[i, j] = 1 #if yes: the middle pixel of the kernel_zone is white
-               else:
-                   eroded_img[i, j] = 0 #if no: the middle pixel of the kernel_zone is black
-                   
-    return (eroded_img * 255) #to get it back to its normal pixel's color value
+            for j in range(0, img_col):
+                kernel_zone = new_image[i:i + kern_row,
+                              j:j + kern_col]  # create a copy of a zone of pixels of the image of the same size as the kernel
+                if (
+                        kernel_zone == kernel).all():  # verify for each pixels (each element of the array) in the kernel_zone if they are the same as the ones in the kernel
+                    eroded_img[i, j] = 1  # if yes: the middle pixel of the kernel_zone is white
+                else:
+                    eroded_img[i, j] = 0  # if no: the middle pixel of the kernel_zone is black
+
+    return eroded_img * 255  # to get it back to its normal pixel's color value
 
 
 def dilate(img, kernel, iteration):
@@ -72,22 +76,26 @@ def dilate(img, kernel, iteration):
     """
     img_row, img_col = img.shape
     kern_row, kern_col = kernel.shape
-    dilated_img = img/255 #to convert 255s into 1s
+    dilated_img = img / 255  # to convert 255s into 1s
 
-    new_row = img_row + kern_row -1 #compute the row size of the new image with a padding
-    new_col = img_col + kern_col -1 #compute the column size of the new image with a padding
-    new_image = np.zeros((new_row, new_col)) #initialize an array of the size of the image with a padding of one pixel to apply the kernel on every pixels of the image
-    
+    new_row = img_row + kern_row - 1  # compute the row size of the new image with a padding
+    new_col = img_col + kern_col - 1  # compute the column size of the new image with a padding
+    new_image = np.zeros((new_row,
+                          new_col))  # initialize an array of the size of the image with a padding of one pixel to apply the kernel on every pixels of the image
+
     for it in range(iteration):
         for i in range(0, img_row):
-           for j in range(0, img_col): #to go through each pixels of the image
-               new_image[i+1, j+1] = dilated_img[i, j] #give the pixel's color value of the image to create a identical image but, with a padding
-               
+            for j in range(0, img_col):  # to go through each pixels of the image
+                new_image[i + 1, j + 1] = dilated_img[
+                    i, j]  # give the pixel's color value of the image to create a identical image but, with a padding
+
         for i in range(0, img_row):
-           for j in range(0, img_col): #to go through each pixels of the image
-               kernel_zone = new_image[i:i+kern_row, j:j+kern_col] #create a copy of a zone of pixels of the image of the same size as the kernel
-               if (kernel_zone == kernel).any(): #verify if any of the pixels (any element of the array) in the kernel_zone is the same as the ones in the kernel
-                   dilated_img[i, j] = 1 #if yes: the middle pixel of the kernel_zone is white
-               else:
-                   dilated_img[i, j] = 0 #if no: the middle pixel of the kernel_zone is black
-    return (dilated_img * 255) #to get it back to its normal pixel's color value
+            for j in range(0, img_col):  # to go through each pixels of the image
+                kernel_zone = new_image[i:i + kern_row,
+                              j:j + kern_col]  # create a copy of a zone of pixels of the image of the same size as the kernel
+                if (
+                        kernel_zone == kernel).any():  # verify if any of the pixels (any element of the array) in the kernel_zone is the same as the ones in the kernel
+                    dilated_img[i, j] = 1  # if yes: the middle pixel of the kernel_zone is white
+                else:
+                    dilated_img[i, j] = 0  # if no: the middle pixel of the kernel_zone is black
+    return dilated_img * 255  # to get it back to its normal pixel's color value
