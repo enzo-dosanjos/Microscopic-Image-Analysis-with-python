@@ -57,7 +57,7 @@ def otsu_threshold(hist, img):
     min_within_class_var = 10000000
     threshold_try = 1
     
-    while threshold_try < 256 : #and threshold_try-3 != i_min: #prevent to try threshol beyond 255 and stop when the indice of the minimum variation is found
+    while threshold_try < 256 and (threshold_try < 50 or i_min != threshold_try-3): #prevent to try threshold beyond 255 and stop when the indice of the minimum variation is found
         new_img = thresholding(img, threshold_try)
         
         background = hist[:threshold_try] #the pixels that should be black according to the threshold that is being tried (below the threshold)
@@ -83,7 +83,7 @@ def otsu_threshold(hist, img):
         if within_class_var < min_within_class_var:
             i_min = threshold_try-1
             min_within_class_var = within_class_var
-        
+        print(f"trying : {threshold_try-1}")
         threshold_try += 1
     return i_min
 
