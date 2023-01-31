@@ -16,12 +16,12 @@ def flood(img, old_color):
 
     Parameters
     ----------
-    img : an image
-    old_color : the old grayscale color you want replaced, int, [0-255]
+    img : array - an image
+    old_color : int - the old grayscale color you want replaced, int, [0-255]
 
     Returns
     -------
-    img : the flooded image
+    img : array - the flooded image
     """
     first_white = np.nonzero(img == old_color)
     new_color = 0
@@ -40,17 +40,17 @@ def flood(img, old_color):
 
 def floodrgb(img, old_color):
     """
-    flood the cells
+    flood the cells with color
     Parameters
     ----------
-    img : the image, 2d array
-    old_color : the color to change, list[int]
+    img : array - image before being flooded in grayscale or black and white
+    old_color : list - the color that should be changed. format : [0-255, 0-255, 0-255]
 
     Returns
     -------
-    img : the flooded img, 2d array
-    cellcount : the number of cell flooded, int
-    color_list : list of all the colored cells
+    img : array - the flooded image in rgb format
+    cellcount : int - return the number of cell flooded
+    color_list : list - list of all the used color
     """
     cellcount = 0
 
@@ -71,9 +71,9 @@ def floodrgb(img, old_color):
 
         color_list.append(copy.deepcopy(new_color))
 
-        #print(color_list)
+        # print(color_list)
 
-        cellcount += 1      # this count the number of cell
+        cellcount += 1  # this count the number of cell
 
         print(f"number of grains : {cellcount}")
 
@@ -84,6 +84,21 @@ def floodrgb(img, old_color):
 
 
 def fill2(img, x, y, old_color, new_color):
+    """
+    sequential alogrithm that fill the cell with a color
+    Parameters
+    ----------
+    img : array - the image to be filled
+    x : int - x coordinate of the starting point
+    y : int - y coordinate of the starting point
+    old_color : list or int - the color that should be replaced. list if img is rgb, or int if img is grayscale
+    new_color : list or int - the color that replace. list if img is rgb, int if img is grayscale
+
+    Returns
+    -------
+    img : array - the image with the new filled cell
+
+    """
 
     queued = [[x, y]]
 
@@ -91,21 +106,20 @@ def fill2(img, x, y, old_color, new_color):
         x = queued[0][0]
         y = queued[0][1]
         img[x][y] = new_color
-        #print(f' {x},{y} : set to {new_color}')
+        # print(f' {x},{y} : set to {new_color}')
         queued.remove(queued[0])
-        #print(f"queue size {len(queued)} ")
+        # print(f"queue size {len(queued)} ")
 
         cellcheck = \
-            [       [x, y + 1],
+            [[x, y + 1],
              [x - 1, y], [x + 1, y],
-                   [x, y - 1]
+             [x, y - 1]
              ]
 
         for elem in cellcheck:
             if img[elem[0]][elem[1]][0] == old_color[0] and img[elem[0]][elem[1]][1] == old_color[1] and \
                     img[elem[0]][elem[1]][2] == old_color[2] and (elem not in queued):
                 queued.append(elem)
-                #print(f' {elem} queued')
+                # print(f' {elem} queued')
 
     return img
-
