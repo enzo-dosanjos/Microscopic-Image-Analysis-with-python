@@ -71,11 +71,11 @@ def floodrgb(img, old_color):
 
         color_list.append(copy.deepcopy(new_color))
 
-        print(color_list)
+        #print(color_list)
 
         cellcount += 1      # this count the number of cell
 
-        print(cellcount)
+        print(f"number of grains : {cellcount}")
 
         img = fill2(img, first_white[0][0], first_white[1][0], old_color, new_color)
         first_white = np.nonzero(img == old_color)
