@@ -5,6 +5,78 @@ Created on Tue Jan 31 17:36:38 2023
 @author: Enzo && Sacha
 """
 
+import cv2
+
+
+def get_props_with_dico(img, list_colors):
+    """
+    count the number of pixels in a cell, the number of pixels of the border of the cell and compute all the heights and widths in the cell
+
+    Parameters
+    ----------
+    img : array
+        array of the color values of the pixels in the image.
+    colors : list
+        a list of the rgb colors of a cell.
+
+    Returns
+    -------
+    properties : dictionary
+        dictionary containing the area, perimeter, height and width of each cells depending on their color.
+
+    """
+    properties = {"[0, 0, 0]-area" : 0, "[0, 0, 0]-perimeter": 0, "[0, 0, 0]-last_height": 0, "[0, 0, 0]-max_height": 0, "[0, 0, 0]-last_width": 0, "[0, 0, 0]-max_width": 0}
+    
+    img_row, img_col, rgb = img.shape
+    
+    for color in list_colors:
+        properties[str(color) + "-area"] = 0
+        properties[str(color) + "-perimeter"] = 0
+        properties[str(color) + "-max_height"] = 0
+        properties[str(color) + "-last_height"] = 0
+        properties[str(color) + "-max_width"] = 0
+        properties[str(color) + "-last_width"] = 0
+        
+    for i in range(img_row):
+        
+        #for the height
+        for key in properties.keys():
+            if key.endswith("-last_height"):
+                properties[key] = 0
+                
+        for j in range(img_col):
+            #get area
+            properties[str(list(img[i, j])) + "-area"] += 1
+            
+            #get border
+            if list(img[i - 1, j]) == [0, 0, 0] or list(img[i, j - 1]) == [0, 0, 0] or list(img[i + 1, j]) == [0, 0, 0] or list(img[i, j + 1]) == [0, 0, 0]:
+                properties[str(list(img[i, j])) + "-perimeter"] += 1
+                
+            #get height
+            properties[str(list(img[i, j])) + "-last_height"] += 1
+            if properties[str(list(img[i, j])) + "-last_height"] > properties[str(list(img[i, j])) + "-max_height"]:
+                properties[str(list(img[i, j])) + "-max_height"] = properties[str(list(img[i, j])) + "-last_height"]
+            
+    #get width
+    for j in range(img_col):
+        for key in properties.keys():
+            if key.endswith("-last_width"):
+                properties[key] = 0
+        for i in range(img_row):
+            properties[str(list(img[i, j])) + "-last_width"] += 1
+            if properties[str(list(img[i, j])) + "-last_width"] > properties[str(list(img[i, j])) + "-max_width"]:
+                properties[str(list(img[i, j])) + "-max_width"] = properties[str(list(img[i, j])) + "-last_width"]
+    
+    #delete useless dictionary keys
+    to_del = []
+    for key in properties.keys():
+        if key.endswith("-last_height") or key.endswith("-last_width"):
+            to_del.append(key)
+    for k in to_del:
+        properties.pop(k, None)
+            
+    return properties
+
 
 def get_properties(img, colors):
     """

@@ -103,10 +103,17 @@ line_print = ["", f"{time.asctime()}", "", ""]
 
 shapecount = [0, 0, 0, 0, 0]  # [triangle, square, circle, oblong, rectangle]
 
-for i, colors in enumerate(color_list):
-    area, perimeter, height, width = get_properties(flooded_img, colors)
 
+properties = get_props_with_dico(flooded_img, color_list)
+
+for i, color in enumerate(color_list):
+    area = properties[str(color) + "-area"]
+    perimeter = properties[str(color) + "-perimeter"]
+    height = properties[str(color) + "-max_height"]
+    width = properties[str(color) + "-max_width"]
+    
     shape = PropertiesFct.findshape(area, width, height, shapecount)  # find the shape of the cell
+    
     cell_list.append([copy.deepcopy(area), copy.deepcopy(perimeter), copy.deepcopy(height), copy.deepcopy(width),
                       copy.deepcopy(shape)])  # save the data of each cell
 
@@ -138,11 +145,11 @@ with open(datatxt, "w") as txt: # write data in a text file, in the \Data folder
         txt.write(line)
         txt.write('\n')
 
-cv2.waitKey(0) # allow the img to be shown
-
 print(f"end time : {time.asctime()}")
 
 print(f"the program took {time.time() - start_calc} to complete")
+
+cv2.waitKey(0) # allow the img to be shown
 
 input("enter anything to close all window \n>")
 
