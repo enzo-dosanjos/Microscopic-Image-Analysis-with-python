@@ -32,7 +32,6 @@ def main():
     img = cv2.imread(imagename, 0)
 
     print("Currently running...")
-    start = time.asctime()
 
     start_calc = time.time()
 
