@@ -22,6 +22,7 @@ def main():
 
     currentpath = os.getcwd()  # get the current paths
     picfold = os.path.join(currentpath, "Data")  # enter the "data folder" in the current path
+    imgfold = os.path.join(currentpath, "Images")
     datatxt = os.path.join(picfold, "Data.txt")
 
     print("default picture name : \nMetal_Structure.png")
@@ -29,7 +30,7 @@ def main():
     imagename = str(input("Image name ? (enter nothing to use the default picture)\n >"))
     if imagename == "":
         imagename = "Metal_Structure.png"
-    img = cv2.imread(imagename, 0)
+    img = cv2.imread(os.path.join(imgfold, imagename), 0)
 
     print("Currently running...")
 
@@ -89,7 +90,7 @@ def main():
 
     shapecount = [0, 0, 0, 0, 0]  # [triangle, square, circle, oblong, rectangle]
 
-    properties = get_props_with_dico(flooded_img, color_list)
+    properties = get_properties(flooded_img, color_list)
 
     for i, color in enumerate(color_list):
         area = properties[str(color) + "-area"]
