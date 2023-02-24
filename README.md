@@ -25,4 +25,4 @@ Once you have all the dependencies, simply lauch "ImageAnalysisMain.py" from the
 When finished, the file will be save in the Data folder, along with a datalog of all the informations of the cells. Also, the image will be displayed.
 To close the images, enter anything inside the console.
 
--------------------------- Thanks you ! --------------------------
+-------------------------- Thank you ! --------------------------
