@@ -5,6 +5,7 @@ This is a school project where the goal is to make our own library to analyse a 
 and get different informations on the grains, like their size, shape and number
 
 -------------------------- Dependencies --------------------------
+
 -Python 3.9 or later with :
 
 numpy
@@ -16,6 +17,7 @@ matplotlib
 
 
 -------------------------- Running the programm --------------------------
+
 You first need to provide an image in the Images folder. Name it something simple, or name it "Metal_Structure.png" as this is the default name. 
 
 Once you have all the dependencies, simply lauch "ImageAnalysisMain.py" from the console or in and IDE, and simply type your inputs in the console.
