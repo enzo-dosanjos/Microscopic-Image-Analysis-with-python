@@ -22,8 +22,9 @@ def main():
 
     currentpath = os.getcwd()  # get the current paths
     picfold = os.path.join(currentpath, "Data")  # enter the "data folder" in the current path
-    imgfold = os.path.join(currentpath, "Images")
     datatxt = os.path.join(picfold, "Data.txt")
+
+    imgfold = os.path.join(currentpath, "Images") # enter the "Images folder" in the current path
 
     print("default picture name : \nMetal_Structure.png")
 

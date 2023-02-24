@@ -11,7 +11,7 @@ import numpy as np
 
 def histogram(img):
     """
-    make an histogram with the number of appearance of each color values in the pixels of the image
+    make a histogram with the number of appearance of each color values in the pixels of the image
 
     Parameters
     ----------
@@ -29,7 +29,8 @@ def histogram(img):
     for i in range(0, row):
         for j in range(0, col):  # go through each pixel of the image
             nb_appearance[img[
-                i, j]] += 1  # make the histogram by increasing by 1 each time a value between 0 to 255 appear for each pixel of the image because the grey pixels appear more often than black pixels
+                i, j]] += 1  # make the histogram by increasing by 1 each time a value between 0 and 255 appear for
+            # each pixel of the image because the grey pixels appear more often than black pixels
     plt.plot(nb_appearance)
     plt.show()
     return nb_appearance
@@ -59,27 +60,33 @@ def otsu_threshold(hist, img):
     threshold_try = 1
 
     while threshold_try < 256 and (
-            threshold_try < 50 or i_min != threshold_try - 3):  # prevent to try threshold beyond 255 and stop when the indice of the minimum variation is found
-        # new_img = thresholding(img, threshold_try)
+            threshold_try < 50 or i_min != threshold_try - 3):  # prevent to try threshold beyond 255 and stop when
+        # the indice of the minimum variation is found
 
         background = hist[
-                     :threshold_try]  # the pixels that should be black according to the threshold that is being tried (below the threshold)
+                     :threshold_try]  # the pixels that should be black according to the threshold that is being
+        # tried (below the threshold)
         foreground = hist[
-                     threshold_try:]  # the pixels that should be white according to the threshold that is being tried (above the threshold)
+                     threshold_try:]  # the pixels that should be white according to the threshold that is being
+        # tried (above the threshold)
 
         # computing weights
         w_background = np.sum(
-            background) / nb_pixels  # compute the weight of every pixel's color value below the threshold which is being tried
+            background) / nb_pixels  # compute the weight of every pixel's color value below the threshold which is
+        # being tried
         w_foreground = np.sum(
-            foreground) / nb_pixels  # compute the weight of every pixel's color value above the threshold which is being tried
+            foreground) / nb_pixels  # compute the weight of every pixel's color value above the threshold which is
+        # being tried
 
         # computing mean
         mean_background = np.sum(
             [pixel_value * nb_appearance for pixel_value, nb_appearance in enumerate(background)]) / np.sum(
-            background)  # compute the mean of every pixel's color value below the threshold which is being tried multiplied by their number of appearance
+            background)  # compute the mean of every pixel's color value below the threshold which is being tried
+        # multiplied by their number of appearance
         mean_foreground = np.sum(
             [pixel_value * nb_appearance for pixel_value, nb_appearance in enumerate(foreground)]) / np.sum(
-            foreground)  # compute the mean of every pixel's color value below the threshold which is being tried multiplied by their number of appearance
+            foreground)  # compute the mean of every pixel's color value below the threshold which is being tried
+        # multiplied by their number of appearance
 
         # computing variance
         var_background = np.nan_to_num(np.sum(
@@ -88,10 +95,11 @@ def otsu_threshold(hist, img):
         var_foreground = np.nan_to_num(np.sum(
             [(pixel_value - mean_foreground) ** 2 * nb_appearance for pixel_value, nb_appearance in
              enumerate(foreground)]) / np.sum(foreground))  # compute the variance of the foreground
-        # convert np.nan_to_num convert the result nan (that we don't want) to a number, usually 0
+        # np.nan_to_num convert the result nan (that we don't want) to a number, usually 0
 
         # compute within class variance
-        within_class_var = w_background * var_background + w_foreground * var_foreground  # compute the sum of the foreground and background spread
+        within_class_var = w_background * var_background + w_foreground * var_foreground  # compute the sum of the
+        # foreground and background spread
 
         # get the indice for which the sum of the foreground and background spread is minimum
         if within_class_var < min_within_class_var:
@@ -104,7 +112,7 @@ def otsu_threshold(hist, img):
 
 def thresholding(img, threshold):
     """
-    transform, according to the threshold value, each pixel's color value to white or black 
+    transform, according to the threshold value, each pixel's color value to white or black
 
     Parameters
     ----------

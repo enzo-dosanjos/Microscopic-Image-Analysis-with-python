@@ -12,7 +12,7 @@ import random
 
 def flood(img, old_color):
     """
-    This flood the cells and fill them with differents hue of gray
+    This flood the cells and fill them with different hue of gray
 
     Parameters
     ----------

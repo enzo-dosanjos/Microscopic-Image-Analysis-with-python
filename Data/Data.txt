@@ -1,5 +1,5 @@
 
-Thu Feb 23 21:04:03 2023
+Fri Feb 24 19:38:34 2023
 
 
 cell 0 : - Area : 853 pixels - Perimeter : 104 pixels - Height : 35 pixels - Width : 30 pixels. Shape : ('oblong', [0, 0, 0, 1, 0]).
@@ -503,4 +503,4 @@ small : [[40, 22, 8, 5, ('rectangle', [0, 0, 0, 1, 1])], [213, 58, 25, 10, ('obl
 
 Cell shape :  11 triangle, 109 square, 1 cirlce, 298 oblong, 75 rectangle.
 
-took 58.62248492240906s to complete
+took 58.57690238952637s to complete
