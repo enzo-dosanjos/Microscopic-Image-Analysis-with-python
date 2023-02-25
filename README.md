@@ -16,7 +16,7 @@ and get different informations on the grains, like their size, shape and number
 (use pip install/conda install along with the name of each of the package in any console to install the required package)
 
 
----------------------------------------- Running the program ---------------------------------------
+------------------------------------------- Running the program ------------------------------------------
 
 You first need to provide an image in the Images folder. Name it something simple, or name it "Metal_Structure.png" as this is the default name. 
 
