@@ -6,7 +6,6 @@ Created on Jan 28 13:07:00 2023
 """
 import numpy as np
 import cv2
-import copy
 import random
 
 
@@ -69,7 +68,7 @@ def floodrgb(img, old_color):
         while new_color in color_list:
             new_color = [random.randint(20, 250), random.randint(1, 250), random.randint(1, 220)]
 
-        color_list.append(copy.deepcopy(new_color))
+        color_list.append(list(new_color))
 
         # print(color_list)
 

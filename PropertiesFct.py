@@ -5,8 +5,6 @@ Created on Tue Jan 31 17:36:38 2023
 @author: Enzo && Sacha
 """
 
-import cv2
-
 
 def get_properties(img, list_colors):
     properties = {"[0, 0, 0]-area": 0, "[0, 0, 0]-perimeter": 0, "[0, 0, 0]-last_height": 0, "[0, 0, 0]-max_height": 0,
